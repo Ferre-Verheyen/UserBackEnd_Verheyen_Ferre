@@ -94,6 +94,16 @@ public class User {
         return ("@$-" + password + "&%#").equals(this.password);
     }
 
+    public int getMembershipYear(int year) {
+        int membershipYear = 0;
+        for (Integer year2 : membershipYears) {
+            if (year2 == year) {
+                membershipYear = year;
+            }
+        }
+        return membershipYear;
+    }
+
     @Override
     public String toString() {
         return this.name + " is " + this.age + " years old and has as email " + this.email;

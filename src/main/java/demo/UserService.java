@@ -46,16 +46,6 @@ public class UserService {
         return userRepository.add(user);
     }
 
-    public User getUserWithEmail(String string) {
-        User x = null;
-        for (int i = 0; i < userRepository.size(); i++) {
-            if (userRepository.get(i).getEmail() == string) {
-                x = userRepository.get(i);
-            }
-        }
-        return x;
-    }
-
     public User removeUser(String string) {
         User x = null;
         for (int i = 0; i < userRepository.size(); i++) {
@@ -65,6 +55,56 @@ public class UserService {
             }
         }
         return x;
+    }
+
+    public List<User> getUsersMembershipGivenYear(int year) {
+        List<User> usersMembershipGivenYear = new ArrayList<>();
+        for (User user : userRepository) {
+            if (user.getMembershipYear(year) == year)
+                usersMembershipGivenYear.add(user);
+        }
+        return usersMembershipGivenYear;
+    }
+
+    public List<User> getListOfUsersOfAgeBetween(int min, int max) {
+        List<User> listOfUsersOfAgeBetween = new ArrayList<>();
+        for (User user : userRepository) {
+            if (user.getAge() > min && user.getAge() < max) {
+                listOfUsersOfAgeBetween.add(user);
+            }
+
+        }
+        return listOfUsersOfAgeBetween;
+    }
+
+    public List<User> getAdults() {
+        List<User> adults = new ArrayList<>();
+        for (User user : userRepository) {
+            if (user.getAge() > 17) {
+                adults.add(user);
+            }
+        }
+        return adults;
+    }
+
+    public User getUserWithEmail(String string) {
+        User userWithEmail = null;
+        for (User user : userRepository) {
+            if (user.getEmail().equals(string)) {
+                userWithEmail = user;
+            }
+        }
+        return userWithEmail;
+    }
+
+    public List<User> getListOfUsersWithEmailAndAge(String email, int age) {
+        List<User> usersWithEmailAndAge = new ArrayList<>();
+        for (User user : userRepository) {
+            if (user.getEmail().equals(email) && user.getAge() == age) {
+                usersWithEmailAndAge.add(user);
+            }
+        }
+        return usersWithEmailAndAge;
     }
 
 }
